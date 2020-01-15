@@ -2,9 +2,9 @@
 Snake Game on Python and Raspberry Pi SenseHAT
 
 Created by: hansvurst
-Current Version: 0.1.1
+Current Version: 0.1.2
 
-CC0
+Licensed under CC0
 '''
 
 from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
@@ -13,12 +13,18 @@ from time import sleep
 from signal import pause
 from sys import exit
 
+
+# adding compatibility to SenseHAT Emulator
+from os import uname
+if uname().nodename == "raspberrypi":
+    from sense_emu import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
+
 def init():
 	global R, G, B
 	R = (100,0,0)
 	G = (0,100,0)
 	B = (0,0,100)
-	
+
 	global sense, snakePosition, pointPosition, ledMatrix
 	sense = SenseHat()
 	sense.clear()
@@ -32,11 +38,11 @@ def init():
 		ledMatrix[pointPosition] = B
 		ledMatrix[i] = G
 	sense.set_pixels(ledMatrix)
-	
+
 	global direction
 	direction = "right"
 	return
-	
+
 def update_matrix():
 	global ledMatrix
 	ledMatrix = 64 * [R]
@@ -45,7 +51,7 @@ def update_matrix():
 		ledMatrix[i] = G
 	sense.set_pixels(ledMatrix)
 	return
-	
+
 def move_right():
 	global snakePosition, pointPosition
 	if snakePosition[-1] in [7,15,23,31,39,47,55,63]:
@@ -59,7 +65,7 @@ def move_right():
 		first += 1
 		for i in range(len(snakePosition)-1):
 			snakePosition[i] = snakePosition[i+1]
-		snakePosition[-1] = first 
+		snakePosition[-1] = first
 	return
 
 def move_left():
@@ -75,9 +81,9 @@ def move_left():
 		first -= 1
 		for i in range(len(snakePosition)-1):
 			snakePosition[i] = snakePosition[i+1]
-		snakePosition[-1] = first 
+		snakePosition[-1] = first
 	return
-	
+
 def move_up():
 	global snakePosition, pointPosition
 	if snakePosition[-1] in [0,1,2,3,4,5,6,7]:
@@ -91,7 +97,7 @@ def move_up():
 		first -= 8
 		for i in range(len(snakePosition)-1):
 			snakePosition[i] = snakePosition[i+1]
-		snakePosition[-1] = first 
+		snakePosition[-1] = first
 	return
 
 def move_down():
@@ -107,7 +113,7 @@ def move_down():
 		first += 8
 		for i in range(len(snakePosition)-1):
 			snakePosition[i] = snakePosition[i+1]
-		snakePosition[-1] = first 
+		snakePosition[-1] = first
 	return
 
 def pushed_up(event):
@@ -139,16 +145,16 @@ if __name__ == "__main__":
 	init()
 	while True:
 		sleep(1)
-		
+
 		if direction == "up": move_up()
 		elif direction == "down": move_down()
 		elif direction == "right": move_right()
 		elif direction == "left": move_left()
-		
+
 		if len(snakePosition) != len(set(snakePosition)):
 			sense.show_message("Yam")
 			exit(0)
-		
+
 		sense.stick.direction_up = pushed_down
 		sense.stick.direction_down = pushed_up
 		sense.stick.direction_left = pushed_right
