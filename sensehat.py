@@ -66,5 +66,5 @@ if __name__ == "__main__":
                     statusServer, colourClock = checkServer()
                     sense.show_message("Server is "+statusServer[0], scroll_speed=0.07,text_colour=statusServer[1])
 
-                if event.direction == "left"
+                if event.direction == "left":
                     snakeGame()
