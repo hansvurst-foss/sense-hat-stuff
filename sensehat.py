@@ -23,7 +23,7 @@ except ImportError:
     pass
 
 # adding modules from local file system
-from clock.clock import *; from  clock.clockwork_3 import * 
+from clock.clock import *; from  clock.clockwork_3 import *
 from games.snake import *
 from service.weather import *
 from service.system import *
@@ -43,7 +43,7 @@ def init():
     sense.set_rotation(180) # alt: flip_h() or flip_v()
     # change fixed rotation to dynamic solution in the future!
     sense.low_light = True
-    initClock()
+    #initClock()
     serverURL, statusServer = initSystem()
     initWeather()
     return serverURL, statusServer

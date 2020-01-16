@@ -8,9 +8,8 @@ Licensed under CC0
 '''
 
 
-def initClock():
-    from clockwork_3 import *
-    return
+#def initClock():
+#    return
 
 def getClockLayout(currentHour, currentMinute, colourClock):
     clockLayoutHours = [None] * 64; clockLayoutMinutes = [None] * 64
