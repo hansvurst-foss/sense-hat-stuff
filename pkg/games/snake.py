@@ -154,8 +154,6 @@ def snakeGame():
             gameStatus = "GameOver"
             continue
 
-
-
         '''
         sense.stick.direction_up = pushed_down
         sense.stick.direction_down = pushed_up
