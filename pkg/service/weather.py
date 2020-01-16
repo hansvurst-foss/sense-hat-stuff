@@ -7,6 +7,8 @@ Current version: 0.1.1
 Licensed under CC0
 '''
 
+from ..config import sense
+
 def getWeather():
     # reading sensor data
     pressure = str(round(sense.get_pressure(),2))
