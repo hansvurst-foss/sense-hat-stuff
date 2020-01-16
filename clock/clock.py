@@ -10,24 +10,7 @@ Licensed under CC0
 
 def initClock():
     from clockwork_3 import *
-    global pressure, pressure_temp, temperature, humidity, envData
-
-    # reading sensor data
-    pressure = str(round(sense.get_pressure(),2))
-    pressure_temp = sense.get_temperature_from_pressure()
-    temperature = str(round(sense.get_temperature()))
-    humidity = str(round(sense.get_humidity()))
-    envData = ("tem="+temperature+"'C"+" "+"hum="+humidity+"%"+" "+"pre="+pressure+"hPa")
-
-    global serverURL
-    serverURL = input("Please insert serverURL: \n-> ")
-    statusServer, colourClock = checkServer(serverURL)
-    return statusServer, colourClock
-
-def getTempCPU():
-    tempFile = open("/sys/class/thermal/thermal_zone0/temp")
-    tempCPU = round(int(tempFile.read())/1000)
-    return tempCPU
+    return
 
 def getClockLayout(currentHour, currentMinute, colourClock):
     clockLayoutHours = [None] * 64; clockLayoutMinutes = [None] * 64
@@ -63,7 +46,6 @@ def getClockLayout(currentHour, currentMinute, colourClock):
 def getTime():
     currentHour = int(str(datetime.datetime.now().time())[:2])
     currentMinute = int(str(datetime.datetime.now().time())[3:5])
-    #print(currentHour, currentMinute)
     return currentHour, currentMinute
 
 def simpleTime(currentMinute):
@@ -74,30 +56,9 @@ def simpleTime(currentMinute):
     elif currentMinute >= 52: currentMinute = 60
     return currentMinute
 
-def checkServer(serverURL):
-    try:
-        #print(urllib.request.urlopen('''INSERT URL HERE!''').getcode())
-        if urllib.request.urlopen(serverURL).getcode() == 200:
-            statusServer = "up"
-            colourClock = g
-    except urllib.error.URLError:
-            statusServer = "down"
-            colourClock = r
-    return statusServer, colourClock
-
 def clock():
     currentHour, currentMinute = getTime()
-    if currentMinute in [0,15,30,45]: statusServer, colourClock = checkServer(serverURL)
-    currentMinute = simpleTime(currentMinute)
-    clockLayout = getClockLayout(currentHour, currentMinute, colourClock)
+    if currentMinute in [0,15,30,45]: statusServer = checkServer(serverURL)
+    simpleMinute = simpleTime(currentMinute)
+    clockLayout = getClockLayout(currentHour, simpleMinute, statusServer[1])
     sense.set_pixels(clockLayout)
-    tempCPU = getTempCPU()
-    if tempCPU < 55:
-        tcCPU = (0,100,0)
-    elif tempCPU >= 55 and tempCPU < 65:
-        tcCPU = (50,50,0)
-    elif tempCPU >= 65:
-        tcCPU = (100,0,0)
-
-    #sense.set_pixels(creeper_pixels)
-    #t.sleep(5); sense.clear(), t.sleep(5)
