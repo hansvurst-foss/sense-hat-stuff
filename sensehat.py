@@ -27,7 +27,6 @@ from pkg.service.weather import *
 from pkg.service.system import *
 
 def init():
-
     sense.set_rotation(180) # alt: flip_h() or flip_v()
     # change fixed rotation to dynamic solution in the future!
     sense.low_light = True

@@ -17,6 +17,7 @@ def initSystem():
     return serverURL, statusServer
 
 def getTempCPU():
+    # add correction method here!
     tempFile = open("/sys/class/thermal/thermal_zone0/temp")
     tempCPU = round(int(tempFile.read())/1000)
     if tempCPU < 55:
@@ -29,7 +30,6 @@ def getTempCPU():
 
 def checkServer(serverURL):
     try:
-        #print(urllib.request.urlopen('''INSERT URL HERE!''').getcode())
         if urllib.request.urlopen(serverURL).getcode() == 200:
             statusServer = "up"
             colourClock = G

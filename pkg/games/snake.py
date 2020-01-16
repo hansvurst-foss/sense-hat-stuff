@@ -107,31 +107,7 @@ def move_down():
             snakePosition[i] = snakePosition[i+1]
         snakePosition[-1] = first
     return
-'''
-def pushed_up(event):
-    global direction
-    if event.action != ACTION_RELEASED:
-        direction = "up"
-    return
 
-def pushed_down(event):
-    global direction
-    if event.action != ACTION_RELEASED:
-        direction = "down"
-    return
-
-def pushed_left(event):
-    global direction
-    if event.action != ACTION_RELEASED:
-        direction = "left"
-    return
-
-def pushed_right(event):
-    global direction
-    if event.action != ACTION_RELEASED:
-        direction = "right"
-    return
-'''
 def snakeGame():
     global gameStatus, direction, snakePosition
     snakeInit()
@@ -153,12 +129,4 @@ def snakeGame():
             sense.show_message("Yam!")
             gameStatus = "GameOver"
             continue
-
-        '''
-        sense.stick.direction_up = pushed_down
-        sense.stick.direction_down = pushed_up
-        sense.stick.direction_left = pushed_right
-        sense.stick.direction_right = pushed_left
-        sense.stick.direction_any = refreshSnake
-        '''
     return

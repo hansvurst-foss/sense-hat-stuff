@@ -1,3 +1,7 @@
+'''
+Setting variables available in all modules
+'''
+
 from sense_hat import SenseHat
 
 sense = SenseHat()

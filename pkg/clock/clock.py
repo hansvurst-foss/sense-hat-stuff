@@ -2,7 +2,7 @@
 Simple clock for the Raspberry Pi SenseHAT
 
 Created by: hansvurst
-Current version: 0.1.2
+Current version: 0.1.3
 
 Licensed under CC0
 '''
@@ -25,7 +25,10 @@ def getClockLayout(currentHour, currentMinute, colourClock):
     elif currentMinute == 45: clockLayoutMinutes = cw3.quarterto;
     elif currentMinute == 60:
         clockLayoutMinutes = cw3.newhour
-        currentHour += 1
+        if currentHour == 23:
+            currentHour = 0
+        else:
+            currentHour += 1
 
     if currentHour == 1 or currentHour ==  13: clockLayoutHours = cw3.oneoclock;
     elif currentHour == 2 or currentHour == 14: clockLayoutHours = cw3.twooclock;
@@ -37,9 +40,9 @@ def getClockLayout(currentHour, currentMinute, colourClock):
     elif currentHour == 8 or currentHour == 20: clockLayoutHours = cw3.eightoclock;
     elif currentHour == 9 or currentHour == 21: clockLayoutHours = cw3.nineoclock;
     elif currentHour == 10 or currentHour == 22: clockLayoutHours = cw3.tenoclock;
-    elif currentHour == 11 or currentHour == 23: clockLayoutHours = elevenoclock;
-    elif currentHour == 0 or currentHour == 12: clockLayoutHours = cw3.twelveoclock;
-    #elif currentHour == 0: clockLayoutHours = [0] * 64
+    elif currentHour == 11 or currentHour == 23: clockLayoutHours = cw3.elevenoclock;
+    elif currentHour == 12: clockLayoutHours = cw3.twelveoclock;
+    elif currentHour == 0: clockLayoutHours = cw3.zerooclock;
 
     for i in range(64):
         if (clockLayoutHours[i] or clockLayoutMinutes[i]) == 1: clockLayout[i] = colourClock;
