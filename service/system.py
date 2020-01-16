@@ -7,6 +7,8 @@ Current Version: 0.1.3
 Licensed under CC0
 '''
 def initSystem():
+    import urllib.request # for checking server-status
+
     serverURL = input("Please insert serverURL: \n-> ")
     statusServer = checkServer(serverURL)
     return serverURL, statusServer

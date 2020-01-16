@@ -13,7 +13,6 @@ from random import randint
 import time; import datetime
 from signal import pause
 from sys import exit
-import urllib.request # for checking server-status
 
 # adding compatibility to SenseHAT Emulator
 try:
