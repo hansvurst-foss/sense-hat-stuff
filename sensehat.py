@@ -23,7 +23,7 @@ except ImportError:
     pass
 
 # adding modules from local file system
-from clock.clock import *
+from clock.clock import *; from  clock.clockwork_3 import * 
 from games.snake import *
 from service.weather import *
 from service.system import *
