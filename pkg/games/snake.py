@@ -2,7 +2,7 @@
 Snake Game on Python and Raspberry Pi SenseHAT
 
 Created by: hansvurst
-Current Version: 0.1.2
+Current Version: 0.1.3
 
 Licensed under CC0
 '''
@@ -19,9 +19,8 @@ from ..config import R,G,B,wh,bl,sense
 
 
 def snakeInit():
-    global gameStatus
     gameStatus = "Running"
-    global snakePosition, pointPosition, ledMatrix
+    global ledMatrix
     ledMatrix = 64 * [R]
     #snakePosition = [10,11,12,13,21,29,30]
     snakePosition = [randint(0,32)]
@@ -30,10 +29,8 @@ def snakeInit():
         ledMatrix[pointPosition] = B
         ledMatrix[i] = G
     sense.set_pixels(ledMatrix)
-
-    global direction
     direction = "right"
-    return
+    return (gameStatus, snakePosition, pointPosition, direction)
 
 def refreshSnake():
     global ledMatrix
@@ -109,8 +106,7 @@ def move_down():
     return
 
 def snakeGame():
-    global gameStatus, direction, snakePosition
-    snakeInit()
+    gameStatus, snakePosition, pointPosition, direction = snakeInit()
     while gameStatus != "GameOver":
         refreshSnake()
         sleep(1)
