@@ -31,7 +31,7 @@ def init():
     # change fixed rotation to dynamic solution in the future!
     sense.low_light = True
     #initClock()
-    serverURL, statusServer = initSystem()
+    serverURL, statusServer = init_system()
     #initWeather()
     return serverURL, statusServer
 
@@ -40,19 +40,19 @@ if __name__ == "__main__":
     serverURL, statusServer = init()
     while True:
         if int(str(datetime.datetime.now().time())[3:5]) in [0,15,30,45]:
-            statusServer = checkServer(serverURL)
+            statusServer = check_server(serverURL)
         clock(statusServer)
         sleep(10)
 
         events = sense.stick.get_events()
         if events and events[-1].action == "released":
             if events[-1].direction == "up":
-                tempCPU = getTempCPU()
-                envData, envOut = getWeather()
+                tempCPU = get_temp_cpu()
+                envData, envOut = get_weather()
                 sense.show_message("CPU="+str(tempCPU[0])+"'C", scroll_speed=0.075,text_colour=tempCPU[1])
                 sense.show_message(envOut, scroll_speed=0.075,text_colour=(100,100,100)); sleep(1)
             elif events[-1].direction == "down":
-                statusServer = checkServer(serverURL)
+                statusServer = check_server(serverURL)
                 sense.show_message(serverURL[8:]+" is "+statusServer[0], scroll_speed=0.07,text_colour=statusServer[1])
             elif events[-1].direction == "left":
-                snakeGame()
+                snake_game()

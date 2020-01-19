@@ -11,12 +11,12 @@ from ..config import R,G,B,wh,bl,sense
 import urllib.request # for checking server-status
 
 
-def initSystem():
+def init_system():
     serverURL = "https://"+input("Please insert serverURL (eg. www.server.com): \n-> ")
     statusServer = checkServer(serverURL)
     return serverURL, statusServer
 
-def getTempCPU():
+def get_temp_cpu():
     # add correction method here!
     tempFile = open("/sys/class/thermal/thermal_zone0/temp")
     tempCPU = round(int(tempFile.read())/1000)
@@ -28,7 +28,7 @@ def getTempCPU():
         tcCPU = (100,0,0)
     return (tempCPU, tcCPU)
 
-def checkServer(serverURL):
+def check_server(serverURL):
     try:
         if urllib.request.urlopen(serverURL).getcode() == 200:
             statusServer = "up"
