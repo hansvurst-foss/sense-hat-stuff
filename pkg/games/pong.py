@@ -110,10 +110,7 @@ def pong_game():
             if event.action != "released":
                 move_racket(racket, event.direction)
         ballPosition, ballDirection = move_ball(ballPosition, ballDirection, racket)
-        print(ballPosition)
         sleep(0.15)
-
-
     sense.show_message("Game over!")
     return
 
