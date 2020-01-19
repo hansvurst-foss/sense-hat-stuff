@@ -1,3 +1,12 @@
+'''
+Pong Game on Python and Raspberry Pi SenseHAT
+
+Created by: hansvurst
+Current Version: 0.1.1
+
+Licensed under CC0
+'''
+
 from time import sleep
 
 from sense_hat import ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
