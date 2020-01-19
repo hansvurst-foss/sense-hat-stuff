@@ -13,7 +13,7 @@ import urllib.request # for checking server-status
 
 def init_system():
     serverURL = "https://"+input("Please insert serverURL (eg. www.server.com): \n-> ")
-    statusServer = checkServer(serverURL)
+    statusServer = check_server(serverURL)
     return serverURL, statusServer
 
 def get_temp_cpu():
