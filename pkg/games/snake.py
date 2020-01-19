@@ -30,7 +30,7 @@ def snakeInit():
         ledMatrix[i] = G
     sense.set_pixels(ledMatrix)
     direction = "right"
-    return (gameStatus, snakePosition, pointPosition, direction)
+    return gameStatus, snakePosition, pointPosition, direction
 
 def refreshSnake():
     global ledMatrix
