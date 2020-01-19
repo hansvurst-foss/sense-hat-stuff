@@ -2,7 +2,7 @@
 Raspberry Pi SenseHAT Desktop gimmick
 
 Created by: hansvurst
-Current version: 0.1.2
+Current version: 0.1.3
 
 Licensed under CC0
 '''
@@ -23,6 +23,7 @@ except ImportError:
 from pkg.config import R,G,B,wh,bl,sense
 from pkg.clock.clock import *
 from pkg.games.snake import *
+from pkg.games.pong import *
 from pkg.service.weather import *
 from pkg.service.system import *
 
@@ -56,3 +57,5 @@ if __name__ == "__main__":
                 sense.show_message(serverURL[8:]+" is "+statusServer[0], scroll_speed=0.07,text_colour=statusServer[1])
             elif events[-1].direction == "left":
                 snake_game()
+            elif events[-1].direction == "right":
+                pong_game()
