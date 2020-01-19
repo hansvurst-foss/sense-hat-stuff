@@ -9,7 +9,7 @@ Licensed under CC0
 
 from ..config import sense
 
-def getWeather():
+def get_weather():
     # reading sensor data
     pressure = str(round(sense.get_pressure(),2))
     pressure_temp = sense.get_temperature_from_pressure()

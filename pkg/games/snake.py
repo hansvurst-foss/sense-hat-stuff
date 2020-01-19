@@ -18,7 +18,7 @@ except ImportError:
 from ..config import R,G,B,wh,bl,sense
 
 
-def snakeInit():
+def snake_init():
     gameStatus = "Running"
     global ledMatrix
     ledMatrix = 64 * [R]
@@ -32,7 +32,7 @@ def snakeInit():
     direction = "right"
     return gameStatus, snakePosition, pointPosition, direction
 
-def refreshSnake():
+def refresh_snake():
     global ledMatrix
     ledMatrix = 64 * [R]
     for i in snakePosition:
@@ -105,10 +105,10 @@ def move_down():
         snakePosition[-1] = first
     return
 
-def snakeGame():
-    gameStatus, snakePosition, pointPosition, direction = snakeInit()
+def snake_game():
+    gameStatus, snakePosition, pointPosition, direction = snake_init()
     while gameStatus != "GameOver":
-        refreshSnake()
+        refresh_snake()
         sleep(1)
         events = sense.stick.get_events()
         if events:
