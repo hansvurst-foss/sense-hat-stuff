@@ -2,7 +2,7 @@
 Raspberry Pi SenseHAT Desktop gimmick
 
 Created by: hansvurst
-Current version: 0.1.3
+Current version: 0.1.4
 
 Licensed under CC0
 '''
@@ -50,8 +50,12 @@ if __name__ == "__main__":
             if events[-1].direction == "up":
                 tempCPU = get_temp_cpu()
                 envData, envOut = get_env_data()
+                weatherData = get_weather()
                 sense.show_message("CPU="+str(tempCPU[0])+"'C", scroll_speed=0.075,text_colour=tempCPU[1])
-                sense.show_message(envOut, scroll_speed=0.075,text_colour=(100,100,100)); sleep(1)
+                sense.show_message(envOut, scroll_speed=0.075,text_colour=(100,100,100))
+                weatherDisplay = get_weather_icon(weatherData)
+                sense.set_pixels(weatherDisplay)
+                sleep(60)
             elif events[-1].direction == "down":
                 statusServer = check_server(serverURL)
                 sense.show_message(serverURL[8:]+" is "+statusServer[0], scroll_speed=0.07,text_colour=statusServer[1])
