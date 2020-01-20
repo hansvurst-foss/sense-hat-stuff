@@ -53,9 +53,8 @@ if __name__ == "__main__":
                 weatherData = get_weather()
                 sense.show_message("CPU="+str(tempCPU[0])+"'C", scroll_speed=0.075,text_colour=tempCPU[1])
                 sense.show_message(envOut, scroll_speed=0.075,text_colour=(100,100,100))
-                weatherDisplay = get_weather_icon(weatherData)
-                sense.load_image(weatherDisplay)
-                sleep(60)
+                sense.load_image(get_weather_icon(weatherData))
+                sleep(10)
             elif events[-1].direction == "down":
                 statusServer = check_server(serverURL)
                 sense.show_message(serverURL[8:]+" is "+statusServer[0], scroll_speed=0.07,text_colour=statusServer[1])
