@@ -9,7 +9,7 @@ Licensed under CC0
 
 from ..config import sense
 
-def get_weather():
+def get_env_data():
     # reading sensor data
     pressure = str(round(sense.get_pressure(),2))
     pressure_temp = sense.get_temperature_from_pressure()
@@ -17,3 +17,5 @@ def get_weather():
     humidity = str(round(sense.get_humidity()))
     envOut = ("tem="+temperature+"'C"+" "+"hum="+humidity+"%"+" "+"pre="+pressure+"hPa")
     return (pressure, pressure_temp, temperature, humidity), envOut
+
+#def get_weather():

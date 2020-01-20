@@ -49,7 +49,7 @@ if __name__ == "__main__":
         if events and events[-1].action == "released":
             if events[-1].direction == "up":
                 tempCPU = get_temp_cpu()
-                envData, envOut = get_weather()
+                envData, envOut = get_env_data()
                 sense.show_message("CPU="+str(tempCPU[0])+"'C", scroll_speed=0.075,text_colour=tempCPU[1])
                 sense.show_message(envOut, scroll_speed=0.075,text_colour=(100,100,100)); sleep(1)
             elif events[-1].direction == "down":
