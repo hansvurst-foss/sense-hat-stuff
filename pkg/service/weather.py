@@ -55,14 +55,19 @@ def get_weather():#location, country
     else: print("OWM API offline")
     return weather
 
-'''
-def display_weather(weather):
+
+def get_weather_icon(weather):
+    ''' translates weather status into displayed icon
+        not completed yet -> where to find complete possible options? '''
+
     displayIcons = {
-        "clear":,
-        "clouds":,
-        "rain":,
-        #thunderstorm?
-        "snow":,
-        "mist":
+        "Clear":"pkg/service/weather-icons/sun.png",
+        "Clouds":"pkg/service/weather-icons/cloud.png",
+        "Rain":"pkg/service/weather-icons/rain.png",
+        "Thunderstorm":"11d",
+        "Snow":"13d",
+        "Mist":"50d"
     }
-'''
+
+    weatherIcon = displayIcons[weather["description"]]
+    return weatherIcon
