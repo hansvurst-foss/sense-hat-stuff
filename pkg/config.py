@@ -2,11 +2,10 @@
 Setting variables available in all modules
 '''
 
-from sense_hat import SenseHat
 try:
     from sense_emu import SenseHat
 except ImportError: pass
-
+from sense_hat import SenseHat
 
 sense = SenseHat()
 

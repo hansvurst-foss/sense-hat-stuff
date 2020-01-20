@@ -33,12 +33,14 @@ def init():
     sense.low_light = True
     #initClock()
     serverURL, statusServer = init_system()
-    #initWeather()
-    return serverURL, statusServer
+    weatherLocation = init_weather()
+    return serverURL, statusServer, weatherLocation
 
 
 if __name__ == "__main__":
-    serverURL, statusServer = init()
+    serverURL, statusServer, weatherLocation = init()
+    print("Initial state of "+serverURL+" is: "+statusServer[0])
+    print("Fetching OWM weather data of "+weatherLocation[0]+" in "+weatherLocation[1]+".\n")
     while True:
         if int(str(datetime.datetime.now().time())[3:5]) in [0,15,30,45]:
             statusServer = check_server(serverURL)
@@ -50,10 +52,10 @@ if __name__ == "__main__":
             if events[-1].direction == "up":
                 tempCPU = get_temp_cpu()
                 envData, envOut = get_env_data()
-                weatherData = get_weather()
                 sense.show_message("CPU="+str(tempCPU[0])+"'C", scroll_speed=0.075,text_colour=tempCPU[1])
                 sense.show_message(envOut, scroll_speed=0.075,text_colour=(100,100,100))
-                sense.load_image(get_weather_icon(weatherData))
+                weatherData = get_weather(weatherLocation)
+                sense.load_image(get_weather_icon(weatherData))                 # BUG: loading of image with relative path not optimal
                 sleep(10)
             elif events[-1].direction == "down":
                 statusServer = check_server(serverURL)

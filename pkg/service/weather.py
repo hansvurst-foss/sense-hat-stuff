@@ -2,7 +2,7 @@
 Simple weather station for the Raspberry Pi SenseHAT
 
 Created by: hansvurst
-Current version: 0.1.2
+Current version: 0.1.3
 
 Licensed under CC0
 '''
@@ -16,6 +16,11 @@ from pyowm import OWM # OpenWeatherMap API
 
 from pprint import pprint
 
+def init_weather():
+    location = input("Which town you want the data from?\n--> ")
+    country = input("In which country is your preferred weather station?\n--> ")
+    return (location, country)
+
 def get_env_data():
     ''' reading sensor data of SenseHAT '''
 
@@ -26,19 +31,17 @@ def get_env_data():
     envOut = ("tem="+temperature+"'C"+" "+"hum="+humidity+"%"+" "+"pre="+pressure+"hPa")
     return (pressure, pressure_temp, temperature, humidity), envOut
 
-def get_weather():#location, country
+def get_weather(location):
     ''' accessing the OpenWeatherMap API for local weather data '''
 
     apiKey = "a65147edaa8f7a3a607aee92181aa2a8"
     owm = OWM(apiKey)
-    country = input("In which country is your preferred weather station?\n--> ")
-    location = input("Which town you want the data from?\n--> ")
     #url = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+apiKey
     if owm.is_API_online() == True:
         #stationData = get(url).json()
         #pprint(stationData["main"])
-        weather_location = owm.weather_at_place(location+","+country)
-        weather = weather_location.get_weather()
+        weatherAtPlace = owm.weather_at_place(location[0]+","+location[1])
+        weather = weatherAtPlace.get_weather()
         weather = {
             "description":weather.get_status(),
             "description_detailed":weather.get_detailed_status(),
@@ -61,9 +64,9 @@ def get_weather_icon(weather):
         not completed yet -> where to find complete possible options? '''
 
     displayIcons = {
-        "Clear":"pkg/service/weather-icons/sun.png",
-        "Clouds":"pkg/service/weather-icons/cloud.png",
-        "Rain":"pkg/service/weather-icons/rain.png",
+        "Clear":"./pkg/service/weather-icons/sun.png",
+        "Clouds":"./pkg/service/weather-icons/cloud.png",
+        "Rain":"./pkg/service/weather-icons/rain.png",
         "Thunderstorm":"11d",
         "Snow":"13d",
         "Mist":"50d"
