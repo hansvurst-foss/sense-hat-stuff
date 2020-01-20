@@ -1,7 +1,7 @@
 # sense-hat-stuff
 *Little Python scripts for the Raspberry Pi Sense HAT*
 
-![Badge](https://img.shields.io/badge/fun-7%2F10-yellow) ![Badge](https://img.shields.io/badge/awesomeness-6%2F10-orange)
+![Badge](https://img.shields.io/badge/fun-7%2F10-yellow) ![Badge](https://img.shields.io/badge/awesomeness-6%2F10-orange) ![Badge](https://img.shields.io/badge/license-CC0-green)
 
 ---
 
